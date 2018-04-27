@@ -2,7 +2,7 @@ FROM resin/armhf-alpine:edge
 
 ARG MONGO_VERSION=3.2.19
 
-# For Mozilla virtualenv: Exception: Could not detect environment shell!
+# For Mozilla virtualenv .. Exception: Could not detect environment shell!
 ENV SHELL /bin/sh
 
 RUN apk update && \
@@ -16,9 +16,19 @@ RUN apk update && \
     cd mongodb-src-r$MONGO_VERSION && \
 # Generate additional sources
     cd src/third_party/mozjs-38/ && \
-    ./get_sources.sh >/dev/null && \
+    ./get_sources.sh >/dev/null 2>&1 && \
     ./gen-config.sh arm linux && \
-    cd -
+    cd - && \
+# Build
+    scons mongo mongod --wiredtiger=off --mmapv1=on && \
+# Test
+    cd build/opt/mongo && \
+    ls -l && \
+    strip -s mongo && \
+    ls -l && \
+    cp mongo mongod /usr/local/bin/ && \
+    mongo --version && \
+    mongod --version
 
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
