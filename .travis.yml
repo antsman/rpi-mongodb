@@ -5,14 +5,13 @@ services:
 
 jobs:
   include:
-    - stage: Prepare qemu
-      script:
-      - docker run --rm --privileged multiarch/qemu-user-static:register --reset
     - stage: Prepare build container
       script:
+      - docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - docker build -f Dockerfile.install -t antsman/rpi-mongodb-install .
     - stage: Build mongodb
       script:
+      - docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - docker build -f Dockerfile.build -t antsman/rpi-mongodb-build .
 
   # test image
