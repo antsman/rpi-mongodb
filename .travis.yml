@@ -3,13 +3,20 @@ sudo: required
 services:
   - docker
 
-script:
-  # prepare qemu
-  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  # build image
-  - docker build -t antsman/rpi-mongodb-build .
+jobs:
+  include:
+    - stage: Prepare qemu
+      script:
+      - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+    - stage: Prepare build container
+      script:
+      - docker build -f Dockerfile.install -t antsman/rpi-mongodb-install .
+    - stage: Build mongodb
+      script:
+      - docker build -f Dockerfile.build -t antsman/rpi-mongodb-build .
+
   # test image
-  - docker run --rm -d --name mongodb antsman/rpi-mongodb-build
+  #- docker run --rm -d --name mongodb antsman/rpi-mongodb-build
   # stop image
-  - time docker stop mongodb
+  #- time docker stop mongodb
 
