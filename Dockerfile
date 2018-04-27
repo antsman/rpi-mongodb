@@ -26,9 +26,8 @@ RUN apk update && \
     ls -l && \
     strip -s mongo && \
     ls -l && \
-    cp mongo mongod /usr/local/bin/ && \
-    mongo --version && \
-    mongod --version
+    ./mongo --version && \
+    ./mongod --version
 
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
