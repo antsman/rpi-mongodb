@@ -6,7 +6,7 @@ RUN apk update && \
         scons \
         build-base python-dev libffi-dev openssl-dev
 
-# COPY entrypoint.sh /
-# ENTRYPOINT ["/entrypoint.sh"]
-CMD ["sh"]
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/sh"]
 
