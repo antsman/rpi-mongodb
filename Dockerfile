@@ -7,10 +7,15 @@ RUN apk update && \
         python scons \
         build-base wget python-dev libffi-dev openssl-dev && \
     python --version && gcc --version && scons --version && \
-#   Get sources
+# Get sources
     wget -N -nv https://fastdl.mongodb.org/src/mongodb-src-r$MONGO_VERSION.tar.gz && \
     tar xf mongodb-src-r$MONGO_VERSION.tar.gz && \
-    cd mongodb-src-r$MONGO_VERSION
+    cd mongodb-src-r$MONGO_VERSION && \
+# Generate additional sources
+    cd src/third_party/mozjs-38/ && \
+    ./get_sources.sh && \
+    ./gen-config.sh arm linux && \
+    cd -
 
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
