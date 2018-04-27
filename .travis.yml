@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  # prepare qemu
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  # build image
+  - docker build -t antsman/rpi-mongodb-build .
+  # test image
+  - docker run --rm -t antsman/rpi-mongodb-build mongodb-build
+  # stop image
+  - time docker stop mongodb-build
