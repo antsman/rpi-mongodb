@@ -1,6 +1,7 @@
 FROM resin/armhf-alpine:edge
 
-RUN apk --no-cache add && \
+RUN apk update && \
+    apk --no-cache add && \
         python \
         scons \
         build-base python-dev libffi-dev openssl-dev
