@@ -9,8 +9,10 @@ jobs:
       script:
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - docker build -f Dockerfile.install -t antsman/rpi-mongodb-install .
+      - docker images
     - stage: Build mongodb
       script:
+      - docker images
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - docker build -f Dockerfile.build -t antsman/rpi-mongodb-build .
 
