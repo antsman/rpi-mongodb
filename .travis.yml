@@ -9,7 +9,7 @@ script:
   # build image
   - docker build -t antsman/rpi-mongodb-build .
   # test image
-  - docker run --rm -t --name mongodb antsman/rpi-mongodb-build
+  - docker run --rm -d --name mongodb antsman/rpi-mongodb-build
   # stop image
   - time docker stop mongodb
 
