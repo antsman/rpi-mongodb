@@ -12,3 +12,4 @@ script:
   - docker run --rm -t antsman/rpi-mongodb-build mongodb-build
   # stop image
   - time docker stop mongodb-build
+
