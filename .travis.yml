@@ -12,6 +12,7 @@ env:
 jobs:
   include:
     - stage: Prepare build container
+      if: branch = master1
       script:
       - echo "$MONGO_VERSION"
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -23,7 +24,7 @@ jobs:
     - stage: Build mongodb
       script:
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      - docker build -f Dockerfile.build -t $IMAGE_BUILD .
+      - docker build --build-arg IMAGE_PREP=$IMAGE_PREP MONGO_VERSION=$MONGO_VERSION -f Dockerfile.build -t $IMAGE_BUILD .
 
   # test image
   #- docker run --rm -d --name mongodb antsman/rpi-mongodb-build
