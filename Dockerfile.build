@@ -1,4 +1,4 @@
-FROM antsman/rpi-mongodb-install
+FROM antsman/rpi-mongodb-buildenv
 
 ARG MONGO_VERSION=3.2.19
 

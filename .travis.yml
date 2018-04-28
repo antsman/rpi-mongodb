@@ -5,20 +5,24 @@ services:
 
 env:
   - MONGO_VERSION=3.2.19
+  - IMAGE_PREP=antsman/rpi-mongodb-buildenv
+  - IMAGE_BUILD=antsman/rpi-mongodb-build
 
 jobs:
   include:
     - stage: Prepare build container
       script:
-      - echo $MONGO_VERSION
+      - echo "$MONGO_VERSION"
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      - docker build --build-arg MONGO_VERSION=$MONGO_VERSION -f Dockerfile.buildenv -t antsman/rpi-mongodb-buildenv .
+      - docker build --build-arg MONGO_VERSION=$MONGO_VERSION -f Dockerfile.buildenv -t $IMAGE_PREP .
+      - docker tag $IMAGE_PREP $IMAGE_PREP:$MONGO_VERSION
       - docker images
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker push $IMAGE_PREP:$MONGO_VERSION 
     - stage: Build mongodb
       script:
-      - docker images
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      - docker build -f Dockerfile.build -t antsman/rpi-mongodb-build .
+      - docker build -f Dockerfile.build -t $IMAGE_BUILD .
 
   # test image
   #- docker run --rm -d --name mongodb antsman/rpi-mongodb-build
