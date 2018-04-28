@@ -8,6 +8,7 @@ env:
     - MONGO_VERSION=3.2.19
     - IMAGE_PREP=antsman/rpi-mongodb-buildenv
     - IMAGE_BUILD=antsman/rpi-mongodb-build
+    - CONTAINER_BUILD=rpi-mongodb-build
 
 jobs:
   include:
@@ -24,10 +25,10 @@ jobs:
     - stage: Build mongodb
       script:
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      - docker build --build-arg IMAGE_PREP=$IMAGE_PREP --build-arg MONGO_VERSION=$MONGO_VERSION -f Dockerfile.build -t $IMAGE_BUILD .
+      - docker run --rm -d --name $CONTAINER_BUILD $IMAGE_PREP:$MONGO_VERSION sleep 1h
+      - ./compile-mongo $CONTAINER_BUILD $MONGO_VERSION
+    - stage: Stop container
+      - time docker stop mongodb
 
-  # test image
-  #- docker run --rm -d --name mongodb antsman/rpi-mongodb-build
-  # stop image
-  #- time docker stop mongodb
+#   - docker build --build-arg IMAGE_PREP=$IMAGE_PREP --build-arg MONGO_VERSION=$MONGO_VERSION -f Dockerfile.build -t $IMAGE_BUILD .
 
