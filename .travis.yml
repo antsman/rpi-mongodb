@@ -3,12 +3,16 @@ sudo: required
 services:
   - docker
 
+env:
+  - MONGO_VERSION=3.2.19
+
 jobs:
   include:
     - stage: Prepare build container
       script:
+      - echo $MONGO_VERSION
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      - docker build -f Dockerfile.install -t antsman/rpi-mongodb-install .
+      - docker build --build-arg MONGO_VERSION=$MONGO_VERSION -f Dockerfile.buildenv -t antsman/rpi-mongodb-buildenv .
       - docker images
     - stage: Build mongodb
       script:
