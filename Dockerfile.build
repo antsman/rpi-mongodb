@@ -6,6 +6,9 @@ FROM $IMAGE_PREP:$MONGO_VERSION
 # For Mozilla virtualenv .. Exception: Could not detect environment shell!
 ENV SHELL /bin/sh
 
+RUN echo $MONGO_VERSION
+RUN echo mongodb-src-r$MONGO_VERSION
+
 RUN cd mongodb-src-r$MONGO_VERSION && \
 # Build
     scons mongo mongod --wiredtiger=off --mmapv1=on && \
