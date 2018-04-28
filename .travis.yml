@@ -4,9 +4,10 @@ services:
   - docker
 
 env:
-  - MONGO_VERSION=3.2.19
-  - IMAGE_PREP=antsman/rpi-mongodb-buildenv
-  - IMAGE_BUILD=antsman/rpi-mongodb-build
+  global:
+    - MONGO_VERSION=3.2.19
+    - IMAGE_PREP=antsman/rpi-mongodb-buildenv
+    - IMAGE_BUILD=antsman/rpi-mongodb-build
 
 jobs:
   include:
