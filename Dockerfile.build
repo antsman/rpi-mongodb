@@ -2,6 +2,7 @@ ARG IMAGE_PREP=antsman/rpi-mongodb-buildenv
 ARG MONGO_VERSION=3.2.19
 
 FROM $IMAGE_PREP:$MONGO_VERSION
+ARG MONGO_VERSION
 
 # For Mozilla virtualenv .. Exception: Could not detect environment shell!
 ENV SHELL /bin/sh
