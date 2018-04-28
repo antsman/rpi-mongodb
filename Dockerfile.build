@@ -2,17 +2,16 @@ ARG IMAGE_PREP=antsman/rpi-mongodb-buildenv
 ARG MONGO_VERSION=3.2.19
 
 FROM $IMAGE_PREP:$MONGO_VERSION
+
+# An ARG declared before a FROM is outside of a build stage ..
 ARG MONGO_VERSION
 
 # For Mozilla virtualenv .. Exception: Could not detect environment shell!
 ENV SHELL /bin/sh
 
-RUN echo $MONGO_VERSION
-RUN echo mongodb-src-r$MONGO_VERSION
-
 RUN cd mongodb-src-r$MONGO_VERSION && \
 # Build
-    scons mongo mongod --wiredtiger=off --mmapv1=on && \
+    scons mongod -j 2 --wiredtiger=off --mmapv1=on && \
 # Test
     cd build/opt/mongo && \
     ls -l && \
