@@ -14,9 +14,12 @@ else
     MONGO_VERSION=$2
 fi
 
-docker exec -ti --user root --workdir /mongodb-src-r$MONGO_VERSION $CONTAINER_NAME -c "
+
+# docker exec -ti $CONTAINER_NAME sh -c "
+docker exec -ti --user root --workdir /mongodb-src-r$MONGO_VERSION $CONTAINER_NAME sh -c "
     set -e
     ls -l
+    cd /mongodb-src-r$MONGO_VERSION
 # For Mozilla virtualenv .. Exception: Could not detect environment shell!
     export SHELL=/bin/sh
 # Build
