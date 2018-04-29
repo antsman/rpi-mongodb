@@ -28,5 +28,6 @@ jobs:
       - docker run --rm -d --name $CONTAINER_BUILD $IMAGE_PREP:$MONGO_VERSION sleep 1h
       - ./compile-mongo $CONTAINER_BUILD $MONGO_VERSION
     - stage: Stop container
+      script:
       - time docker stop $CONTAINER_NAME
 
