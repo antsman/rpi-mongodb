@@ -32,6 +32,7 @@ EXPOSE 27017
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 
-# CMD ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db", "$MONGOD_EXTRA_OPTIONS"]
+USER $USER
+
 CMD ["sh", "-c", "exec /usr/bin/mongod --config /data/mongodb.conf --dbpath /data/db $MONGOD_EXTRA_OPTIONS"]
 
