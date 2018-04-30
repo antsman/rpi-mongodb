@@ -23,7 +23,8 @@ RUN apt-get -q update && \
 # Prepare data folder
     mkdir $DATA/db -p && \
     cp /etc/mongodb.conf $DATA && \
-    chown -R $USER:$USER $DATA
+    chown -R $USER:$USER $DATA && \
+    chown -R $USER:$USER /var/log/mongodb
 
 # WORKDIR $DATA
 
