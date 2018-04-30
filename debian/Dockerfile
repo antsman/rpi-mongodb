@@ -1,4 +1,5 @@
-FROM resin/armv7hf-debian:jessie
+ARG DEBIAN_VERSION=jessie
+FROM resin/armv7hf-debian:$DEBIAN_VERSION
 
 # User, home (app) and data folders
 ENV USER mongodb
