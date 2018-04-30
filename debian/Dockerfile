@@ -1,30 +1,34 @@
 FROM resin/armv7hf-debian:jessie
-# FROM resin/raspberry-pi2-debian
 
 # User, home (app) and data folders
-#ENV USER baseuser
+ENV USER mongodb
 ENV DATA /data
-# ENV HOME /usr/src/$USER
+
+# User and group ID, for pi normally 1000
+ARG UID=1000
+ARG GID=1000
+
+# Extra options to mongod like --journal --smallfiles
+ARG MONGOD_EXTRA_OPTIONS
 
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get install mongodb && \
-#   apk-get install bash && \
-    rm -rf /var/lib/apt/lists/*
-
+    rm -rf /var/lib/apt/lists/* && \
+# Adjust user and group ID
+    usermod -u $UID $USER && \
+    groupmod -g $GID $USER && \
 # Prepare data folder
-RUN mkdir $DATA
+    mkdir $DATA/db -p && \
+    cp /etc/mongodb.conf $DATA && \
+    chown -R $USER:$USER $DATA
 
-WORKDIR $DATA
+# WORKDIR $DATA
 
-# Add $USER user so we aren't running as root.
-# RUN adduser --home $DATA --no-create-home -gecos '' --disabled-password $USER && \
-#   chown -R $USER:$USER $HOME && \
-#    chown -R $USER:$USER $DATA
-
-#USER $USER
+EXPOSE 27017
 
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/bin/bash"]
+
+CMD ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db", "$MONGOD_EXTRA_OPTIONS"]
 
