@@ -12,6 +12,7 @@ pipeline {
         stage('BUILD') {
             steps {
                 sh 'cd debian'
+                sh 'ls -l'
                 sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
             }
         }
