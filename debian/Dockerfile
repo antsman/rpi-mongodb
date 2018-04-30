@@ -24,4 +24,7 @@ WORKDIR $DATA
 
 #USER $USER
 
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/bin/bash"]
+
