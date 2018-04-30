@@ -23,6 +23,7 @@ jobs:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker push $IMAGE_PREP:$MONGO_VERSION 
     - stage: Build mongodb
+#   Build does not finish in time - 50 min in Travis.org - dropping for now ..
       script:
       - docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - docker run --rm -d --name $CONTAINER_BUILD $IMAGE_PREP:$MONGO_VERSION sleep 1h
