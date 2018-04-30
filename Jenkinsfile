@@ -19,6 +19,8 @@ pipeline {
         stage('TEST') {
             steps {
                 sh "docker run -d --rm --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG"
+                sh 'docker ps -a'
+                sh "docker top $CONTAINER_NAME"
                 dir('debian') {
                     sh "./get-versions.sh $CONTAINER_NAME"   // Get mongodb and debian version in started container, store in env.properties
                     load './env.properties'
