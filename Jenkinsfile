@@ -11,6 +11,7 @@ pipeline {
      stages {
         stage('BUILD') {
             steps {
+                sh 'cd debian'
                 sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
             }
         }
@@ -29,7 +30,7 @@ pipeline {
         }
         stage('DEPLOY') {
             when {
-                branch 'master1
+                branch 'master1'
             }
             steps {
                 echo 'Build succeeded, push image ..'
