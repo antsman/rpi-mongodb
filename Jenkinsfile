@@ -12,7 +12,6 @@ pipeline {
         stage('BUILD') {
             steps {
                 dir('debian') {
-                    sh 'ls -l'
                     sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
                 }
             }
@@ -21,13 +20,11 @@ pipeline {
             steps {
                 sh "docker run -d --rm --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG /sbin/init"
                 sh "docker exec -t $CONTAINER_NAME mongod --version"
-/*
                 sh "./get-versions.sh $CONTAINER_NAME"   // Get mongodb and debian version in started container, store in env.properties
                 load './env.properties'
                 echo "$MONGO_VERSION"
                 echo "$DEBIAN_VERSION"
                 sh "time docker stop $CONTAINER_NAME"
-*/
             }
         }
         stage('DEPLOY') {
