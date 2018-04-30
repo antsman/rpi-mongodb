@@ -11,10 +11,11 @@ ARG GID=1000
 
 # Extra options to mongod like --journal --smallfiles
 ARG MONGOD_EXTRA_OPTIONS
+ENV MONGOD_EXTRA_OPTIONS $MONGOD_EXTRA_OPTIONS
 
-RUN apt-get update && \
-    apt-get upgrade && \
-    apt-get install mongodb && \
+RUN apt-get -q update && \
+    apt-get -q upgrade && \
+    apt-get -q install mongodb && \
     rm -rf /var/lib/apt/lists/* && \
 # Adjust user and group ID
     usermod -u $UID $USER && \
