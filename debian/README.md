@@ -1,5 +1,5 @@
 # rpi-mongodb
 
 - debain based
-- uasing latest version from official repo
+- using latest version from official repo
 
