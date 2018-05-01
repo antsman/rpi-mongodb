@@ -30,8 +30,9 @@ WORKDIR $DATA
 
 EXPOSE 27017
 
-COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
+# COPY entrypoint.sh /
+ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
+# ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
 # ENTRYPOINT ["/entrypoint.sh"]
 
 USER $USER
