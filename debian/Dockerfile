@@ -28,7 +28,7 @@ USER $USER
 
 EXPOSE 27017 28017
 
-COPY entrypoint.sh
+COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod", "--config", "$DATA/mongodb.conf", "--dbpath", "$DATA/db"]
 
 CMD ["--smallfiles"]
