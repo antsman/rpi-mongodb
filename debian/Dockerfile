@@ -13,8 +13,8 @@ ARG GID=1000
 ARG MONGOD_EXTRA_OPTIONS
 ENV MONGOD_EXTRA_OPTIONS $MONGOD_EXTRA_OPTIONS
 
-RUN apt-get -q update && \
-    apt-get -q upgrade && \
+RUN apt-get -qq update && \
+    apt-get -qq upgrade && \
     apt-get -q install mongodb && \
     rm -rf /var/lib/apt/lists/* && \
 # Adjust user and group ID
@@ -26,14 +26,16 @@ RUN apt-get -q update && \
     chown -R $USER:$USER $DATA && \
     chown -R $USER:$USER /var/log/mongodb
 
-# WORKDIR $DATA
+WORKDIR $DATA
 
 EXPOSE 27017
 
 COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod"]
+# ENTRYPOINT ["/entrypoint.sh"]
 
 USER $USER
 
-CMD ["sh", "-c", "exec /usr/bin/mongod --config /data/mongodb.conf --dbpath /data/db $MONGOD_EXTRA_OPTIONS"]
+CMD ["--config", "false", "--dbpath /data/db", "--journal", "--smallfiles"]
+# CMD ["sh", "-c", "exec /usr/bin/mongod --config /data/mongodb.conf --dbpath /data/db $MONGOD_EXTRA_OPTIONS"]
 
