@@ -31,11 +31,11 @@ WORKDIR $DATA
 EXPOSE 27017
 
 COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod"]
+ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod", "--dbpath", "/data/db"]
 # ENTRYPOINT ["/entrypoint.sh"]
 
 USER $USER
 
-CMD ["--config", "false", "--dbpath /data/db", "--journal", "--smallfiles"]
+CMD ["--config", "false", "--journal", "--smallfiles"]
 # CMD ["sh", "-c", "exec /usr/bin/mongod --config /data/mongodb.conf --dbpath /data/db $MONGOD_EXTRA_OPTIONS"]
 
