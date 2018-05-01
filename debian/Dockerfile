@@ -9,10 +9,6 @@ ENV DATA /data
 ARG UID=1000
 ARG GID=1000
 
-# Extra options to mongod like --journal --smallfiles
-ARG MONGOD_EXTRA_OPTIONS
-ENV MONGOD_EXTRA_OPTIONS $MONGOD_EXTRA_OPTIONS
-
 RUN apt-get -qq update && \
     apt-get -qq upgrade && \
     apt-get -q install mongodb && \
@@ -28,15 +24,11 @@ RUN apt-get -qq update && \
 
 WORKDIR $DATA
 
-EXPOSE 27017
-
-# COPY entrypoint.sh /
-ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
-# ENTRYPOINT ["/entrypoint.sh", "/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
-# ENTRYPOINT ["/entrypoint.sh"]
-
 USER $USER
 
+EXPOSE 27017 28017
+
+ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
+
 CMD ["--smallfiles"]
-# CMD ["sh", "-c", "exec /usr/bin/mongod --config /data/mongodb.conf --dbpath /data/db $MONGOD_EXTRA_OPTIONS"]
 
