@@ -33,7 +33,7 @@ pipeline {
         }
         stage('DEPLOY') {
             when {
-                branch 'master1'
+                branch 'master'
             }
             steps {
                 echo 'Build succeeded, push image ..'
