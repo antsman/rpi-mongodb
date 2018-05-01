@@ -18,12 +18,12 @@ pipeline {
         }
         stage('TEST') {
             steps {
-                sh "docker run -d --rm --name $CONTAINER_NAME --env MONGOD_EXTRA_OPTIONS=--smallfiles $IMAGE_NAME:$IMAGE_TAG"
+                sh "docker run -d --rm --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG"
                 sh "docker ps -a -f name=$CONTAINER_NAME"
                 sh "docker top $CONTAINER_NAME"
                 sh "docker exec $CONTAINER_NAME ps -ef"
                 dir('debian') {
-                    sh "./get-versions.sh $CONTAINER_NAME"   // Get mongodb and debian version in container, store in env.properties
+                    sh "./get-versions.sh $CONTAINER_NAME"  // Get mongodb and debian version in container, store in env.properties
                     load './env.properties'
                 }
                 echo "$MONGO_VERSION"
