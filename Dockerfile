@@ -10,7 +10,7 @@ ARG UID=1000
 ARG GID=1000
 
 RUN apt-get -qq update && \
-    apt-get -qq upgrade && \
+    # apt-get -qq upgrade && \
     apt-get -q install mongodb && \
     rm -rf /var/lib/apt/lists/* && \
 # Adjust user and group ID
@@ -31,4 +31,3 @@ EXPOSE 27017 28017
 ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
 
 CMD ["--smallfiles"]
-
