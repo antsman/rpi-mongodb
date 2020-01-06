@@ -15,9 +15,9 @@ RUN apt-get update -qq && \
 # Install MongoDB Community Edition
 # https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/
     # Import the MongoDB public GPG Key
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add - &&\
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add - &&\
     # Create a source list file for MongoDB
-    echo "deb http://repo.mongodb.org/apt/debian $DEBIAN_VERSION/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list && \
+    echo "deb http://repo.mongodb.org/apt/debian $DEBIAN_VERSION/mongodb-org/4.2 main" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list && \
     # Reload local package database
     apt-get update -qq && \
     # Install the latest stable version
