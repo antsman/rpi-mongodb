@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=jessie
+ARG DEBIAN_VERSION=stretch
 FROM debian:$DEBIAN_VERSION-slim
 
 # User, home (app) and data folders
@@ -9,8 +9,27 @@ ARG HOME=/home/$USER
 # Runtime packages required
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      mongodb && \
+      wget gnupg procps && \
     rm -rf /var/lib/apt/lists/*
+
+# Install MongoDB Community Edition
+# https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/
+    # Import the MongoDB public GPG Key
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add - &&\
+    # Create a source list file for MongoDB
+    echo "deb http://repo.mongodb.org/apt/debian $DEBIAN_VERSION/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list && \
+    # Reload local package database
+    apt-get update -qq && \
+    # Install the latest stable version
+    apt-get install -y \
+      mongodb-org && \
+    rm -rf /var/lib/apt/lists/* && \
+    # Pin the package at the currently installed version:
+    echo "mongodb-org hold" | dpkg --set-selections && \
+    echo "mongodb-org-shell hold" | dpkg --set-selections && \
+    echo "mongodb-org-tools hold" | dpkg --set-selections && \
+    echo "mongodb-org-server hold" | dpkg --set-selections && \
+    echo "mongodb-org-mongos hold" | dpkg --set-selections
 
 # User and group ID, for pi normally 1000
 ARG UID=1000
