@@ -2,6 +2,7 @@ ARG DEBIAN_VERSION=stretch
 FROM debian:$DEBIAN_VERSION-slim
 
 # User, home (app) and data folders
+ARG DEBIAN_VERSION=stretch
 ARG DATA=/data
 ARG USER=mongodb
 ARG HOME=/home/$USER
