@@ -23,7 +23,7 @@ RUN mkdir -p $SRC && \
     git clone --branch master --single-branch https://github.com/mongodb/mongo.git && \
     ls -lh
 
-WORKDIR $SRC
+WORKDIR $SRC/mongo
 
 # Python Prerequisites
 RUN apt-get update -qq && \
