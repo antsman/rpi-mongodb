@@ -32,7 +32,7 @@ RUN pip3 install -r etc/pip/compile-requirements.txt
 # Build packages required extra (to be moved up)
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      libcurl4-openssl-dev && \
+      libcurl4-openssl-dev glibc-source && \
     rm -rf /var/lib/apt/lists/*
 
 # Build, only database
