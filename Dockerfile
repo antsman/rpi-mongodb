@@ -6,9 +6,8 @@ RUN apt-get update -qq && \
     apt-get install -y -qq \
       build-essential \
       libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev \
-      git \
       python-dev python-pip libssl-dev \
-      libcurl4-openssl-dev glibc-source curl python && \
+      libcurl4-openssl-dev glibc-source git curl wget python && \
     rm -rf /var/lib/apt/lists/*
 
 ARG SRC=/usr/src
@@ -16,7 +15,7 @@ ARG SRC=/usr/src
 # Prepare src folder
 RUN mkdir -p $SRC && \
     cd $SRC && \
-    # Get the code
+# Get the code
     git clone https://github.com/mongodb/mongo.git && \
     ls -lh
 
@@ -27,32 +26,18 @@ ARG RELEASE=r3.2.22
 RUN git checkout $RELEASE && \
     git branch
 
-# # Python Prerequisites
-# RUN pip install -r etc/pip/compile-requirements.txt
-
-# Build packages required extra (to be moved up)
-RUN apt-get update -qq && \
-    apt-get install -y -qq \
-      wget && \
-    rm -rf /var/lib/apt/lists/*
-
 # Generate additional sources
-RUN pwd && \
-    ls -lha && \
-    cd src/third_party/mozjs-* && \
-    ls -lha && \
-    pwd && \
+RUN cd src/third_party/mozjs-* && \
     ./get_sources.sh
 
 RUN cd src/third_party/mozjs-* && \
     SHELL=/bin/bash ./gen-config.sh arm linux
 
-# Build, only database
+# Build, database and shell
+# https://koenaerts.ca/compile-and-install-mongodb-on-raspberry-pi/
 # https://github.com/mongodb/mongo/wiki/Build-Mongodb-From-Source
 # https://github.com/mongodb/mongo/blob/master/docs/building.md
-# https://koenaerts.ca/compile-and-install-mongodb-on-raspberry-pi/
-# RUN python buildscripts/scons.py mongod --use-hardware-crc32=off --disable-warnings-as-errors
-RUN python buildscripts/scons.py mongod --wiredtiger=off --mmapv1=on --disable-warnings-as-errors
+RUN python buildscripts/scons.py mongod mongo --wiredtiger=off --mmapv1=on --disable-warnings-as-errors
 
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=buster
