@@ -23,10 +23,13 @@ RUN mkdir -p $SRC && \
     git clone --branch master --single-branch https://github.com/mongodb/mongo.git && \
     ls -lh
 
+WORKDIR $SRC
+
 # Python Prerequisites
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      python3-dev libssl-dev && \
+      python3-dev python3-pip libssl-dev && \
+      pip3 install -r etc/pip/compile-requirements.txt && \
     rm -rf /var/lib/apt/lists/*
 
 # User, home (app) and data folders
