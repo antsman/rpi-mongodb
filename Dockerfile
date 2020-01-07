@@ -34,11 +34,11 @@ RUN apt-get update -qq && \
     apt-get install -y -qq \
       libcurl4-openssl-dev glibc-source curl && \
     rm -rf /var/lib/apt/lists/* && \
+
 # Generate additional sources
-    cd src/third_party/mozjs-* && \
+RUN cd src/third_party/mozjs-* && \
     ./get_sources.sh && \
-    ./gen-config.sh arm linux && \
-    cd -
+    ./gen-config.sh arm linux
 
 # Build, only database
 # https://github.com/mongodb/mongo/wiki/Build-Mongodb-From-Source
