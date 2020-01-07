@@ -1,15 +1,15 @@
-ARG DEBIAN_VERSION=buster
+ARG DEBIAN_VERSION=stretch
 FROM debian:$DEBIAN_VERSION-slim as build
 
 # Build packages required
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      build-essential && \
-      # libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
+      build-essential \
+      libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # User, home (app) and data folders
-ARG DEBIAN_VERSION=buster
+ARG DEBIAN_VERSION=stretch
 ARG DATA=/data
 ARG USER=mongodb
 ARG HOME=/home/$USER
