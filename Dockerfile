@@ -23,8 +23,9 @@ WORKDIR $SRC/mongo
 
 # Check out specific release
 ARG RELEASE=r4.2.2
-RUN git checkout tags/$RELEASE && \
-    git branch build-$RELEASE
+RUN git checkout $RELEASE && \
+    git branch build-$RELEASE && \
+    git branch
 
 # Python Prerequisites
 RUN pip3 install -r etc/pip/compile-requirements.txt
