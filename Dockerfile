@@ -33,7 +33,7 @@ RUN pip3 install -r etc/pip/compile-requirements.txt
 RUN apt-get update -qq && \
     apt-get install -y -qq \
       libcurl4-openssl-dev glibc-source curl && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/*
 
 # Generate additional sources
 RUN cd src/third_party/mozjs-* && \
