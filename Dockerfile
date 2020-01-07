@@ -27,8 +27,8 @@ ARG RELEASE=r3.2.22
 RUN git checkout $RELEASE && \
     git branch
 
-# Python Prerequisites
-RUN pip install -r etc/pip/compile-requirements.txt
+# # Python Prerequisites
+# RUN pip install -r etc/pip/compile-requirements.txt
 
 # # Build packages required extra (to be moved up)
 # RUN apt-get update -qq && \
