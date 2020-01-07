@@ -16,7 +16,7 @@ ARG SRC=/usr/src
 RUN mkdir -p $SRC && \
     cd $SRC && \
     # Get the code
-    git clone --branch master --single-branch https://github.com/mongodb/mongo.git && \
+    git clone https://github.com/mongodb/mongo.git && \
     ls -lh
 
 WORKDIR $SRC/mongo
