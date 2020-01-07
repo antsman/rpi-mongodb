@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=stretch
+ARG DEBIAN_VERSION=buster
 FROM debian:$DEBIAN_VERSION-slim as build
 
 # Build packages required
@@ -9,7 +9,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # User, home (app) and data folders
-ARG DEBIAN_VERSION=stretch
+ARG DEBIAN_VERSION=buster
 ARG DATA=/data
 ARG USER=mongodb
 ARG HOME=/home/$USER
