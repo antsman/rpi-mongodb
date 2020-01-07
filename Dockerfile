@@ -44,10 +44,8 @@ RUN pwd && \
     pwd && \
     ./get_sources.sh
 
-ENV PYTHON /usr/bin/python 
-
 RUN cd src/third_party/mozjs-* && \
-    ./gen-config.sh arm linux
+    SHELL=/bin/bash ./gen-config.sh arm linux
 
 # Build, only database
 # https://github.com/mongodb/mongo/wiki/Build-Mongodb-From-Source
