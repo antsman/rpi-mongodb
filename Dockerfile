@@ -32,10 +32,18 @@ RUN pip3 install -r etc/pip/compile-requirements.txt
 # Build packages required extra (to be moved up)
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      libcurl4-openssl-dev glibc-source && \
-    rm -rf /var/lib/apt/lists/*
+      libcurl4-openssl-dev glibc-source curl && \
+    rm -rf /var/lib/apt/lists/* && \
+# Generate additional sources
+    cd src/third_party/mozjs-* && \
+    ./get_sources.sh && \
+    ./gen-config.sh arm linux && \
+    cd -
 
 # Build, only database
+# https://github.com/mongodb/mongo/wiki/Build-Mongodb-From-Source
+# https://github.com/mongodb/mongo/blob/master/docs/building.md
+# https://koenaerts.ca/compile-and-install-mongodb-on-raspberry-pi/
 RUN python3 buildscripts/scons.py mongod --use-hardware-crc32=off --disable-warnings-as-errors
 
 # User, home (app) and data folders
