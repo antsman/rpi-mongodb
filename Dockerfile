@@ -23,6 +23,12 @@ RUN mkdir -p $SRC && \
     git clone --branch master --single-branch https://github.com/mongodb/mongo.git && \
     ls -lh
 
+# Python Prerequisites
+RUN apt-get update -qq && \
+    apt-get install -y -qq \
+      python3.7-dev libssl-dev && \
+    rm -rf /var/lib/apt/lists/*
+
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=stretch
 ARG DATA=/data
