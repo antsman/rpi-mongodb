@@ -41,7 +41,7 @@ RUN pwd && \
     cd src/third_party/mozjs-* && \
     ls -lha && \
     pwd && \
-    ./get_sources.sh && \
+    ./get-sources.sh && \
     ./gen-config.sh arm linux
 
 # Build, only database
