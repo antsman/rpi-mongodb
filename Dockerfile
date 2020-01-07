@@ -42,7 +42,7 @@ RUN pwd && \
     cd src/third_party/mozjs-* && \
     ls -lha && \
     pwd && \
-    ./get-sources.sh
+    ./get_sources.sh
 
 RUN cd src/third_party/mozjs-* && \
     ./gen-config.sh arm linux
