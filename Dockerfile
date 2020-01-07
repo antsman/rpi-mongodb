@@ -24,6 +24,9 @@ WORKDIR $SRC/mongo
 # Python Prerequisites
 RUN pip3 install -r etc/pip/compile-requirements.txt
 
+# Build, only database
+RUN python3 buildscripts/scons.py mongod
+
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=stretch
 ARG DATA=/data
