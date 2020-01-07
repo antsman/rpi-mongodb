@@ -21,7 +21,8 @@ RUN mkdir -p $SRC && \
 
 # Check out specific release
 ARG RELEASE=r4.2.2
-RUN git checkout tags/$RELEASE -b $RELEASE && \
+RUN cd $SRC && \
+    git checkout tags/$RELEASE -b $RELEASE && \
     git branch
 
 WORKDIR $SRC/mongo
