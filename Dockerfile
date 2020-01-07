@@ -29,6 +29,12 @@ RUN git checkout $RELEASE && \
 # Python Prerequisites
 RUN pip3 install -r etc/pip/compile-requirements.txt
 
+# Build packages required extra (to be moved up)
+RUN apt-get update -qq && \
+    apt-get install -y -qq \
+      libcurl-dev && \
+    rm -rf /var/lib/apt/lists/*
+
 # Build, only database
 RUN python3 buildscripts/scons.py mongod
 
