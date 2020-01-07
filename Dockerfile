@@ -8,6 +8,12 @@ RUN apt-get update -qq && \
       libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
     rm -rf /var/lib/apt/lists/*
 
+# Build packages required extra
+RUN apt-get update -qq && \
+    apt-get install -y -qq \
+      git && \
+    rm -rf /var/lib/apt/lists/*
+
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=stretch
 ARG DATA=/data
