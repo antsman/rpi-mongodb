@@ -39,6 +39,7 @@ RUN apt-get update -qq && \
 RUN pwd && \
     ls -lha && \
     cd src/third_party/mozjs-* && \
+    ls -lha && \
     pwd && \
     ./get_sources.sh && \
     ./gen-config.sh arm linux
