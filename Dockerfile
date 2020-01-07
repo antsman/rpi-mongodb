@@ -11,12 +11,15 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 ARG SRC=/usr/src
+ARG RELEASE=r4.2.2
 
 # Prepare src folder
 RUN mkdir -p $SRC && \
     cd $SRC && \
     # Get the code
     git clone --branch master --single-branch https://github.com/mongodb/mongo.git && \
+    git checkout tags/$RELEASE -b $RELEASE && \
+    git branch && \
     ls -lh
 
 WORKDIR $SRC/mongo
