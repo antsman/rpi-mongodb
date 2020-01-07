@@ -59,6 +59,8 @@ ARG HOME=/home/$USER
 
 EXPOSE 27017 28017
 
-ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
+# ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
+#
+# CMD ["--smallfiles"]
 
-CMD ["--smallfiles"]
+CMD ["ping", "localhost"]
