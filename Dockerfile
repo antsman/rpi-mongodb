@@ -20,7 +20,7 @@ ARG SRC=/usr/src
 RUN mkdir -p $SRC && \
     cd $SRC && \
     # Get the code
-    git clone --branch master --single-branch git@github.com:mongodb/mongo.git && \
+    git clone --branch master --single-branch https://github.com/mongodb/mongo.git && \
     ls -lh
 
 # User, home (app) and data folders
