@@ -42,7 +42,7 @@ RUN pwd && \
     ls -lha && \
     pwd && \
     ./get-sources.sh && \
-    ./gen-config.sh arm linux
+    ./gen-config.sh aarch64 linux
 
 # Build, only database
 # https://github.com/mongodb/mongo/wiki/Build-Mongodb-From-Source
