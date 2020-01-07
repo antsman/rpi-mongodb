@@ -36,7 +36,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # Build, only database
-RUN python3 buildscripts/scons.py mongod
+RUN python3 buildscripts/scons.py mongod --disable-warnings-as-errors
 
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=buster
