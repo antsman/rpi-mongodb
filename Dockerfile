@@ -23,7 +23,7 @@ WORKDIR $SRC/mongo
 
 # Check out specific release
 ARG RELEASE=r4.2.2
-RUN git checkout $RELEASE
+RUN git checkout $RELEASE && \
     git branch
 
 # Python Prerequisites
