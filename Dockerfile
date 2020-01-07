@@ -26,7 +26,7 @@ RUN mkdir -p $SRC && \
 # Python Prerequisites
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      python3.7-dev libssl-dev && \
+      python3-dev libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # User, home (app) and data folders
