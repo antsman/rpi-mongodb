@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=stretch
+ARG DEBIAN_VERSION=buster
 FROM debian:$DEBIAN_VERSION-slim as build
 
 # Build packages required
@@ -23,8 +23,7 @@ WORKDIR $SRC/mongo
 
 # Check out specific release
 ARG RELEASE=r4.2.2
-RUN git checkout $RELEASE && \
-    git branch build-$RELEASE && \
+RUN git checkout $RELEASE
     git branch
 
 # Python Prerequisites
@@ -34,7 +33,7 @@ RUN pip3 install -r etc/pip/compile-requirements.txt
 RUN python3 buildscripts/scons.py mongod
 
 # User, home (app) and data folders
-ARG DEBIAN_VERSION=stretch
+ARG DEBIAN_VERSION=buster
 ARG DATA=/data
 ARG USER=mongodb
 ARG HOME=/home/$USER
