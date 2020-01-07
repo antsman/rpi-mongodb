@@ -22,10 +22,7 @@ RUN mkdir -p $SRC && \
 WORKDIR $SRC/mongo
 
 # Python Prerequisites
-RUN apt-get update -qq && \
-    apt-get install -y -qq \
-      pip3 install -r etc/pip/compile-requirements.txt && \
-    rm -rf /var/lib/apt/lists/*
+RUN pip3 install -r etc/pip/compile-requirements.txt
 
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=stretch
