@@ -44,6 +44,8 @@ RUN pwd && \
     pwd && \
     ./get_sources.sh
 
+ENV PYTHON /usr/bin/python 
+
 RUN cd src/third_party/mozjs-* && \
     ./gen-config.sh arm linux
 
