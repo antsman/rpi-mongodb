@@ -14,6 +14,15 @@ RUN apt-get update -qq && \
       git && \
     rm -rf /var/lib/apt/lists/*
 
+ARG SRC=/usr/src
+
+# Prepare src folder
+RUN mkdir -p $SRC && \
+    cd $SRC && \
+    # Get the code
+    git clone --branch master --single-branch git@github.com:mongodb/mongo.git && \
+    ls -lh
+
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=stretch
 ARG DATA=/data
