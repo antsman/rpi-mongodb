@@ -5,7 +5,7 @@ FROM debian:$DEBIAN_VERSION-slim as build
 RUN apt-get update -qq && \
     apt-get install -y -qq \
       build-essential && \
-      libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
+      # libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # User, home (app) and data folders
