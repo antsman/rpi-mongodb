@@ -63,4 +63,4 @@ EXPOSE 27017 28017
 #
 # CMD ["--smallfiles"]
 
-CMD ["ping", "localhost"]
+CMD ["sleep", "600"]
