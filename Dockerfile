@@ -5,13 +5,9 @@ FROM debian:$DEBIAN_VERSION-slim as build
 RUN apt-get update -qq && \
     apt-get install -y -qq \
       build-essential \
-      libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
-    rm -rf /var/lib/apt/lists/*
-
-# Build packages required extra
-RUN apt-get update -qq && \
-    apt-get install -y -qq \
-      git && \
+      libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev \
+      git \
+      python3-dev python3-pip libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 ARG SRC=/usr/src
@@ -28,7 +24,6 @@ WORKDIR $SRC/mongo
 # Python Prerequisites
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      python3-dev python3-pip libssl-dev && \
       pip3 install -r etc/pip/compile-requirements.txt && \
     rm -rf /var/lib/apt/lists/*
 
