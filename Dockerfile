@@ -30,11 +30,11 @@ RUN git checkout $RELEASE && \
 # # Python Prerequisites
 # RUN pip install -r etc/pip/compile-requirements.txt
 
-# # Build packages required extra (to be moved up)
-# RUN apt-get update -qq && \
-#     apt-get install -y -qq \
-#       libcurl4-openssl-dev glibc-source curl python && \
-#     rm -rf /var/lib/apt/lists/*
+# Build packages required extra (to be moved up)
+RUN apt-get update -qq && \
+    apt-get install -y -qq \
+      wget && \
+    rm -rf /var/lib/apt/lists/*
 
 # Generate additional sources
 RUN pwd && \
