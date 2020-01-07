@@ -7,7 +7,7 @@ RUN apt-get update -qq && \
       build-essential \
       libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev \
       git \
-      python-dev python-pip libssl-dev && \
+      python-dev python-pip libssl-dev \
       libcurl4-openssl-dev glibc-source curl python && \
     rm -rf /var/lib/apt/lists/*
 
