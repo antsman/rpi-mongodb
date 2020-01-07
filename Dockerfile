@@ -36,7 +36,10 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # Generate additional sources
-RUN cd src/third_party/mozjs-* && \
+RUN pwd && \
+    ls -lha && \
+    cd src/third_party/mozjs-* && \
+    pwd && \
     ./get_sources.sh && \
     ./gen-config.sh arm linux
 
