@@ -4,7 +4,7 @@ FROM debian:$DEBIAN_VERSION-slim as build
 # Build packages required
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      build-essential
+      build-essential && \
       libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev && \
     rm -rf /var/lib/apt/lists/*
 
