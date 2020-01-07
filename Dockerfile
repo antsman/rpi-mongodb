@@ -36,7 +36,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # Build, only database
-RUN python3 buildscripts/scons.py mongod CCFLAGS=-march=armv8-a+crc --disable-warnings-as-errors
+RUN python3 buildscripts/scons.py mongod --use-hardware-crc32=off --disable-warnings-as-errors
 
 # User, home (app) and data folders
 ARG DEBIAN_VERSION=buster
