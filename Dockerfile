@@ -60,7 +60,7 @@ COPY --from=build $SRC/mongo/mongo* /usr/bin/
 # Runtime packages required
 RUN apt-get update -qq && \
     apt-get install -y -qq \
-      procps && \
+      procps net-tools && \
     rm -rf /var/lib/apt/lists/*
 
 # Prepare user, folders
