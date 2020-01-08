@@ -23,6 +23,7 @@ pipeline {
                 echo "$MONGO_VERSION"
                 echo "$OS_VERSION"
                 sh 'date'
+                sh "docker exec -t $CONTAINER_NAME netstat -tlp | grep :27017 | grep mongod"
                 sh "time docker stop $CONTAINER_NAME"
             }
         }
