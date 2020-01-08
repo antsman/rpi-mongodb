@@ -67,16 +67,13 @@ RUN apt-get update -qq && \
 RUN mkdir -p $DATA/db && \
 # Add $USER user so we aren't running as root
     adduser -gecos '' --disabled-password $USER && \
-    chown -R $USER:$USER $DATA && \
-# Prepare log folder
-    mkdir -p /var/log/$USER && \
-    chown -R $USER:$USER /var/log/$USER
+    chown -R $USER:$USER $DATA
 
 WORKDIR $HOME
 USER $USER
 
 EXPOSE 27017
 
-ENTRYPOINT ["/usr/bin/mongod", "--dbpath", "/data/db"]
+ENTRYPOINT ["/usr/bin/mongod", "--dbpath", "/data/db", "--nojournal", "--storageEngine=mmapv1"]
 
 CMD ["--smallfiles"]
