@@ -55,7 +55,7 @@ ARG SRC=/usr/src
 ARG HOME=/home/$USER
 
 # Copy build result
-COPY --from=build $SRC/mongo/mongo* /usr/bin
+COPY --from=build $SRC/mongo/mongo* /usr/bin/
 
 # Runtime packages required
 RUN apt-get update -qq && \
