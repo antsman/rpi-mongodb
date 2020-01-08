@@ -77,6 +77,6 @@ USER $USER
 
 EXPOSE 27017
 
-ENTRYPOINT ["/usr/bin/mongod", "--config", "/data/mongodb.conf", "--dbpath", "/data/db"]
+ENTRYPOINT ["/usr/bin/mongod", "--dbpath", "/data/db"]
 
 CMD ["--smallfiles"]
