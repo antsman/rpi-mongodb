@@ -1,5 +1,7 @@
 # rpi-mongodb
 
+![release](https://badgen.net/github/tag/antsman/rpi-mongodb?icon=github&label=latest%20release&color=green)
+
 - debian based
 - latest 32bit mongodb version (3.2.22) from [official repo](https://github.com/mongodb/mongo/releases/tag/r3.2.22)
 - adjusted for pi user/group id
