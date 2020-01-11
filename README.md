@@ -1,6 +1,6 @@
 # rpi-mongodb
 
-[![release](https://badgen.net/github/tag/antsman/rpi-mongodb?icon=github&label=latest%20release&color=green)](https://github.com/antsman/rpi-mongodb/releases)
+[![version](https://badgen.net/github/tag/antsman/rpi-mongodb?icon=github&label=latest%20version&color=green)](https://github.com/antsman/rpi-mongodb/releases)
 [![size](https://badgen.net/docker/size/antsman/rpi-mongodb/latest/arm?icon=docker&label=image%20size)](https://hub.docker.com/r/antsman/rpi-mongodb/tags)
 [![pulls](https://badgen.net/docker/pulls/antsman/rpi-mongodb?icon=docker&color=gray)](https://hub.docker.com/r/antsman/rpi-mongodb)
 
